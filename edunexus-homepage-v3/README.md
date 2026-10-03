@@ -3,31 +3,6 @@
 面向首次访问者（学生、教师、比赛组织方、项目合作成员、其他高校团队）的产品介绍主页，可整体部署到 GitHub Pages。
 
 v3 在 v1（任务书口径）基础上，参考 Linear / Raycast / Cursor / Vercel / Khanmigo / NotebookLM 等优秀产品主页的风格重新制作：以**第一轮任务书数据为唯一产品口径**（四种模式 + AI 模拟课堂），汇报幻灯片仅用于确认"已实现功能"与可用素材，不再作为产品叙事来源。
-
-## 快速开始
-
-### 本地预览
-
-单文件静态页面，无构建步骤：
-
-```bash
-# 方式一：直接用浏览器打开
-open index.html
-
-# 方式二：本地起一个静态服务器（推荐）
-python3 -m http.server 8080
-# 访问 http://localhost:8080
-```
-
-### 部署到 GitHub Pages
-
-1. 将本目录内容提交到 GitHub 仓库（项目为 `Bearcoder6/HUST-CSAgent`，建议在个人 feature 分支如 `feature/<name>-project-homepage` 上开发，验收后合入 `dev`）；
-2. 仓库根目录需有 `index.html`（如放在 `project-homepage/` 子目录，按子目录调整部署路径）；
-3. 仓库 `Settings → Pages`：Source 选 `Deploy from a branch`，选部署分支与目录，保存后等待 1–2 分钟；
-4. 访问 `https://<用户名>.github.io/<仓库名>/` 确认页面、图片、字体正常加载。
-
-> 页面内全部资源经 CDN 远程引用（图片 `aka.doubaocdn.com`、字体 `miaoda.feishu.cn`），不依赖本地文件与后端；页面无 API Key、密码、服务器地址等敏感信息。
-
 ## 页面结构（v3）
 
 单页滚动式布局，锚点导航：产品功能 / 应用场景 / 使用流程 / 技术特点 / 开放计划。

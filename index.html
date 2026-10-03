@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAIR·EduNexus 智联教枢 — 面向大学师生的 AI 学习与校园知识工作空间</title>
+<meta name="description" content="MAIR·EduNexus 智联教枢是面向高校师生的多智能体教学与事务服务平台：让问题、资料、课程与学习产物形成可追溯的闭环，覆盖公共事务、知识学习、PPT 制作、算法练习与 AI 模拟课堂。">
+<meta property="og:title" content="MAIR·EduNexus 智联教枢">
+<meta property="og:description" content="让问题、资料、课程与学习产物形成可追溯的闭环。面向大学师生的 AI 学习与校园知识工作空间。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aka.doubaocdn.com/s/wORAKpk2DJ">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B9E88'/%3E%3Ccircle cx='20' cy='32' r='7' fill='white'/%3E%3Ccircle cx='44' cy='32' r='7' fill='white'/%3E%3Cpath d='M27 32h10' stroke='white' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+/* ============ 设计令牌 ============ */
+:root{
+  --brand:#0B9E88;
+  --brand-deep:#087A6A;
+  --brand-soft:#E3F5F0;
+  --brand-tint:#F0FAF7;
+  --ink:#13263B;
+  --ink-soft:#44586C;
+  --ink-faint:#71839A;
+  --paper:#F7FAF9;
+  --card:#FFFFFF;
+  --line:#E3ECE9;
+  --purple:#7B6CE8;
+  --blue:#3D8FE0;
+  --amber:#E08A3C;
+  --font-display:"Noto Serif SC","Songti SC","SimSun",serif;
+  --font-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --radius:20px;
+  --shadow:0 10px 34px rgba(19,38,59,.07);
+  --shadow-lg:0 24px 60px rgba(19,38,59,.12);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.75;font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+section{scroll-margin-top:84px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.icon{width:1.25em;height:1.25em;display:inline-block;vertical-align:-.22em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ============ 顶部导航 ============ */
+.nav{position:sticky;top:0;z-index:50;background:rgba(247,250,249,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(19,38,59,.06)}
+.nav-inner{display:flex;align-items:center;gap:26px;height:68px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:17px;letter-spacing:.01em}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#12B49C,#0B9E88);display:grid;place-items:center;color:#fff;flex:none;box-shadow:0 6px 16px rgba(11,158,136,.35)}
+.brand-mark svg{width:20px;height:20px;stroke-width:2}
+.brand-sub{color:var(--ink-faint);font-size:12px;font-weight:500;display:block;letter-spacing:.06em;font-style:normal}
+.nav-links{display:flex;align-items:center;gap:24px;margin-left:auto;font-size:15px;color:var(--ink-soft)}
+.nav-links a{transition:color .2s}
+.nav-links a:hover{color:var(--brand)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border-radius:999px;padding:9px 20px;font-size:14.5px;font-weight:600;transition:background .2s,transform .2s}
+.nav-cta:hover{background:var(--brand-deep);transform:translateY(-1px)}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:8px 11px;cursor:pointer;color:var(--ink);margin-left:auto}
+@media(max-width:920px){
+  .nav-links,.nav-cta{display:none}
+  .nav-toggle{display:inline-flex}
+  .nav-links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:4px;background:#fff;border-bottom:1px solid var(--line);padding:14px 28px 18px;box-shadow:var(--shadow)}
+  .nav-links.open a{width:100%;padding:10px 0;border-bottom:1px dashed var(--line);font-size:16px}
+  .nav-links.open .nav-cta{display:inline-flex;margin-top:14px}
+}
+
+/* ============ 首屏 Hero ============ */
+.hero{position:relative;overflow:hidden;padding:96px 0 90px;background:
+  radial-gradient(900px 480px at 12% -8%,rgba(11,158,136,.13),transparent 62%),
+  radial-gradient(760px 460px at 92% 4%,rgba(123,108,232,.10),transparent 60%),
+  radial-gradient(640px 420px at 55% 110%,rgba(61,143,224,.08),transparent 58%),
+  var(--paper)}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(19,38,59,.055) 1px,transparent 1px);background-size:26px 26px;mask-image:linear-gradient(180deg,rgba(0,0,0,.5),transparent 78%);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:700;letter-spacing:.22em;color:var(--brand-deep);text-transform:uppercase;margin-bottom:22px}
+.eyebrow::before{content:"";width:26px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--brand),transparent)}
+.hero h1{font-family:var(--font-display);font-weight:900;font-size:clamp(2.5rem,5vw,4.05rem);line-height:1.16;letter-spacing:.01em;color:var(--ink)}
+.hero h1 .zh{display:block;font-size:.62em;font-weight:700;color:var(--brand-deep);margin-top:10px;letter-spacing:.14em;font-style:normal}
+.hero-slogan{font-family:var(--font-display);font-size:clamp(1.18rem,2vw,1.5rem);font-weight:600;color:var(--ink);margin-top:24px;line-height:1.5}
+.hero-slogan em{font-style:normal;color:var(--brand);border-bottom:3px solid var(--brand-soft)}
+.hero-sub{color:var(--ink-soft);font-size:clamp(.98rem,1.35vw,1.08rem);margin-top:16px;max-width:56ch}
+.hero-sub b{color:var(--ink);font-weight:700}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:13px 26px;font-size:15.5px;font-weight:600;transition:transform .2s var(--ease),box-shadow .2s,background .2s;border:0;cursor:pointer;font-family:var(--font-body)}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:var(--brand-deep);transform:translateY(-2px);box-shadow:0 12px 28px rgba(11,158,136,.28)}
+.btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand-deep);transform:translateY(-2px);box-shadow:var(--shadow)}
+.hero-values{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.hv-card{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:14px;padding:15px 16px;display:flex;gap:12px;align-items:flex-start;backdrop-filter:blur(6px)}
+.hv-card .icon{width:20px;height:20px;color:var(--brand);margin-top:3px;flex:none}
+.hv-card b{display:block;font-size:14px;font-weight:700;color:var(--ink)}
+.hv-card span{font-size:12px;color:var(--ink-faint);display:block;margin-top:2px}
+@media(max-width:560px){.hero-values{grid-template-columns:1fr}}
+
+/* Hero 界面框架 */
+.hero-visual{position:relative}
+.browser{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);overflow:hidden}
+.browser-bar{display:flex;align-items:center;gap:10px;padding:13px 16px;background:#FBFDFC;border-bottom:1px solid var(--line)}
+.bb-dots{display:flex;gap:6px}
+.bb-dots i{width:10px;height:10px;border-radius:50%;background:#DCE7E3}
+.bb-dots i:first-child{background:#F2B8A5}
+.bb-dots i:nth-child(2){background:#F2D6A5}
+.bb-url{margin-left:10px;flex:1;max-width:340px;font-size:12.5px;color:var(--ink-faint);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:5px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bb-tag{font-size:11px;font-weight:700;color:var(--brand-deep);background:var(--brand-soft);border-radius:999px;padding:4px 10px;letter-spacing:.08em}
+.hero-shot img{width:100%;height:auto;display:block}
+.float-chip{position:absolute;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px 16px;display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:600;color:var(--ink)}
+.float-chip .icon{color:var(--brand)}
+.fc1{top:-22px;left:-26px;animation:floaty 5.5s ease-in-out infinite}
+.fc2{bottom:-20px;right:-20px;animation:floaty 5.5s ease-in-out 1.6s infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@media(max-width:980px){
+  .hero{padding:64px 0 72px}
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .hero-visual{max-width:680px;margin:0 auto}
+  .fc1{left:6px}
+  .fc2{right:6px}
+}
+
+/* ============ 能力速览条 ============ */
+.cap-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+.cap-inner{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:22px 0}
+.cap-label{font-size:12.5px;font-weight:700;letter-spacing:.14em;color:var(--ink-faint);margin-right:6px}
+.cap-pill{font-size:13.5px;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 14px;transition:border-color .2s,color .2s}
+.cap-pill:hover{color:var(--brand-deep);border-color:var(--brand)}
+
+/* ============ 通用区块 ============ */
+.section{padding:104px 0}
+.sec-head{max-width:740px;margin-bottom:56px}
+.sec-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:700;letter-spacing:.2em;color:var(--brand-deep);text-transform:uppercase;margin-bottom:16px}
+.sec-eyebrow::before{content:"";width:24px;height:2px;border-radius:2px;background:var(--brand)}
+.sec-head h2{font-family:var(--font-display);font-weight:700;font-size:clamp(1.7rem,3vw,2.35rem);line-height:1.3;letter-spacing:.01em}
+.sec-head p{color:var(--ink-soft);margin-top:14px;font-size:1.05rem}
+
+/* ============ 四种模式 ============ */
+.modes-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.mode-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s;display:flex;flex-direction:column}
+.mode-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.mode-shot{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.mode-shot img{width:100%;height:auto;transition:transform .5s var(--ease)}
+.mode-card:hover .mode-shot img{transform:scale(1.025)}
+.mode-num{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.6);border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:13px;padding:5px 11px;color:var(--ink);letter-spacing:.08em;box-shadow:0 4px 14px rgba(19,38,59,.12)}
+.mode-body{padding:28px 30px 30px;display:flex;flex-direction:column;flex:1}
+.mode-tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--brand-deep);text-transform:uppercase;margin-bottom:10px}
+.mode-tag .icon{width:14px;height:14px}
+.mode-title{display:flex;align-items:center;gap:12px;font-size:1.3rem;font-weight:700}
+.mode-title .icon{width:26px;height:26px;padding:5px;border-radius:9px;color:#fff}
+.mt-public .icon{background:var(--purple)}
+.mt-learn .icon{background:var(--blue)}
+.mt-ppt .icon{background:var(--brand)}
+.mt-code .icon{background:var(--amber)}
+.mode-desc{color:var(--ink-soft);margin-top:12px;font-size:15px}
+.mode-out{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:13.5px;font-weight:600;color:var(--brand-deep)}
+.mode-out .icon{width:16px;height:16px}
+.mode-status{margin-top:14px;font-size:12.5px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:12px}
+.status-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;margin-right:8px}
+.sb-live{background:var(--brand-soft);color:var(--brand-deep)}
+.sb-wip{background:#FDF0E0;color:#A86B1E}
+.sb-plan{background:#EDEBFB;color:#5B4FC9}
+@media(max-width:820px){.modes-grid{grid-template-columns:1fr}}
+
+/* ============ AI 模拟课堂 ============ */
+.classroom{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.classroom-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:center}
+.classroom-shot{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-lg);background:#fff}
+.classroom-shot img{width:100%;height:auto}
+.classroom-shot figcaption{font-size:12.5px;color:var(--ink-faint);padding:12px 18px;border-top:1px solid var(--line);background:#FBFDFC}
+.feature-list{list-style:none;margin-top:26px;display:grid;gap:18px}
+.feature-list li{display:flex;gap:15px;align-items:flex-start}
+.feature-list .icon{width:22px;height:22px;color:var(--brand);margin-top:3px;flex:none}
+.feature-list strong{display:block;font-size:15.5px;font-weight:700}
+.feature-list span{color:var(--ink-soft);font-size:14px}
+.cr-status{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px}
+@media(max-width:980px){.classroom-grid{grid-template-columns:1fr;gap:36px}}
+
+/* ============ 应用场景 ============ */
+.scene-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.scene-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px;transition:transform .25s var(--ease),box-shadow .25s}
+.scene-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.scene-card .icon{width:30px;height:30px;color:var(--brand);margin-bottom:16px}
+.scene-card .for-tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--ink-faint);text-transform:uppercase;margin-bottom:8px}
+.scene-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.scene-card p{font-size:13.5px;color:var(--ink-soft)}
+@media(max-width:960px){.scene-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.scene-grid{grid-template-columns:1fr}}
+
+/* ============ 证据链 · 使用流程 ============ */
+.chain{position:relative;background:#13263B;color:#EAF2F6;overflow:hidden}
+.chain::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(720px 400px at 8% 0%,rgba(11,158,136,.22),transparent 62%),
+  radial-gradient(700px 420px at 96% 100%,rgba(123,108,232,.16),transparent 60%)}
+.chain .wrap{position:relative}
+.chain .sec-eyebrow{color:#5FDCC6}
+.chain .sec-eyebrow::before{background:#5FDCC6}
+.chain .sec-head h2{color:#fff}
+.chain .sec-head p{color:#A9BCCB}
+.chain-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-top:22px}
+.chain-step{position:relative;padding:0 14px}
+.chain-node{width:58px;height:58px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;color:#7FE3CE;margin-bottom:16px;position:relative;z-index:1;transition:background .3s,border-color .3s}
+.chain-step:hover .chain-node{background:rgba(11,158,136,.28);border-color:#3ECBB2}
+.chain-node .icon{width:24px;height:24px}
+.chain-step::after{content:"";position:absolute;top:28px;right:-18px;left:66px;height:2px;background:repeating-linear-gradient(90deg,rgba(127,227,206,.5) 0 7px,transparent 7px 13px);z-index:0}
+.chain-step:last-child::after{display:none}
+.chain-step h3{font-size:1.02rem;font-weight:700;color:#fff;margin-bottom:8px}
+.chain-step p{font-size:13px;color:#9FB4C4;line-height:1.6}
+.trust-note{display:flex;gap:14px;align-items:flex-start;margin-top:44px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:18px 22px;color:#C8D8E4;font-size:14px}
+.trust-note .icon{width:20px;height:20px;color:#5FDCC6;margin-top:3px;flex:none}
+.trust-note b{color:#fff;font-weight:700}
+.chain-sig{display:flex;flex-wrap:wrap;gap:16px 34px;margin-top:30px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12)}
+.chain-sig div{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:600;color:#DFEAF0}
+.chain-sig .icon{color:#5FDCC6;width:22px;height:22px}
+@media(max-width:1024px){
+  .chain-steps{grid-template-columns:repeat(2,1fr);row-gap:38px;column-gap:20px}
+  .chain-step::after{display:none}
+}
+@media(max-width:560px){.chain-steps{grid-template-columns:1fr}}
+
+/* ============ 技术特点 ============ */
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tech-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 26px;transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+.tech-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#C9E5DC}
+.tech-card .icon{width:26px;height:26px;color:var(--brand);margin-bottom:18px}
+.tech-card h3{font-size:1.08rem;font-weight:700;margin-bottom:9px}
+.tech-card p{font-size:14px;color:var(--ink-soft)}
+@media(max-width:960px){.tech-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.tech-grid{grid-template-columns:1fr}}
+
+/* ============ 开放计划 · 里程碑 ============ */
+.roadmap{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.timeline{position:relative;margin-top:34px;padding:0 8px}
+.tl-line{position:absolute;top:14px;left:8%;right:8%;height:2px;background:repeating-linear-gradient(90deg,#D6E8E2 0 8px,transparent 8px 14px)}
+.tl-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tl-node{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:44px 28px 30px;transition:transform .25s var(--ease),box-shadow .25s}
+.tl-node:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.tl-dot{position:absolute;top:0;left:28px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff;transform:translateY(-50%);z-index:1;font-size:12px;font-weight:700}
+.tl-dot .icon{width:14px;height:14px;color:#fff}
+.tl-now .tl-dot{background:var(--brand);box-shadow:0 0 0 6px var(--brand-soft)}
+.tl-next .tl-dot{background:var(--blue);box-shadow:0 0 0 6px #E8F2FC}
+.tl-later .tl-dot{background:var(--purple);box-shadow:0 0 0 6px #EEECFB}
+.tl-label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--ink-faint);text-transform:uppercase;margin-bottom:12px}
+.tl-phase{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 10px;margin-left:6px}
+.tl-now .tl-phase{background:var(--brand-soft);color:var(--brand-deep)}
+.tl-next .tl-phase{background:#E8F2FC;color:#2E6FA8}
+.tl-later .tl-phase{background:#EEECFB;color:#5B4FC9}
+.tl-node h3{font-family:var(--font-display);font-size:1.32rem;font-weight:700;margin-bottom:12px}
+.tl-node p{font-size:14.5px;color:var(--ink-soft)}
+.rm-note{margin-top:44px;display:flex;gap:14px;align-items:flex-start;background:var(--brand-tint);border:1px solid #CBE9E0;border-radius:16px;padding:18px 22px;color:var(--brand-deep);font-size:14.5px}
+.rm-note .icon{width:20px;height:20px;margin-top:3px;flex:none}
+@media(max-width:900px){
+  .tl-line{display:none}
+  .tl-grid{grid-template-columns:1fr;gap:26px}
+  .tl-node{padding-top:34px}
+}
+
+/* ============ 页脚 ============ */
+.footer{background:#0E1F30;color:#9FB4C4;padding:64px 0 40px}
+.footer-top{display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:36px}
+.footer-brand{display:flex;align-items:center;gap:12px;font-weight:700;color:#fff;font-size:17px}
+.footer-brand .brand-mark{background:linear-gradient(135deg,#12B49C,#0B9E88)}
+.footer-desc{margin-top:14px;font-size:13.5px;max-width:340px;color:#7E93A8}
+.footer-cols{display:flex;gap:56px;flex-wrap:wrap}
+.footer-cols h4{color:#fff;font-size:13px;font-weight:700;letter-spacing:.12em;margin-bottom:14px}
+.footer-cols a{display:block;font-size:14px;padding:5px 0;transition:color .2s}
+.footer-cols a:hover{color:#5FDCC6}
+.footer-bottom{margin-top:30px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;font-size:12.5px;color:#60778C}
+
+/* ============ 动效 ============ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal-d1{transition-delay:.08s}
+.reveal-d2{transition-delay:.16s}
+.reveal-d3{transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+
+/* 焦点可见性 */
+:focus-visible{outline:3px solid rgba(11,158,136,.55);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<!-- ===== 图标符号库 ===== -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16.5H6.5A2.5 2.5 0 0 0 4 22z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M9 7.5h6M9 11h6"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6M9 17.5h4"/></symbol>
+  <symbol id="i-slides" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8M8 8.5l3 2.5 5-4"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 5l-3 14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l5.5-3.5z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5M3 16.5l9 5 9-5"/></symbol>
+  <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M12 7.5v4M5 15.5V14a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v1.5"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></symbol>
+  <symbol id="i-filecheck" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14.5l2 2 4-4.5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></symbol>
+  <symbol id="i-cycles" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.3M21 12a9 9 0 0 1-15.5 6.3"/><path d="M18 2.5V7H13.5M6 21.5V17h4.5"/></symbol>
+  <symbol id="i-grad" viewBox="0 0 24 24"><path d="M4 18L11 5l3 7 2.5-4L20 18z"/><path d="M8 18h12"/></symbol>
+  <symbol id="i-teacher" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M4 16l3 4h10l3-4M12 8l1.8 1.2-1 2.3H11.2l-1-2.3zM4 8h16M4 12h16"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/><path d="M16 9h3a1 1 0 0 1 1 1v11M8 7h2M8 11h2M8 15h2M14 7h2M14 11h2M14 15h2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.5a3.5 3.5 0 0 1 0 6.6M17.5 14.8a5.5 5.5 0 0 1 3 5.2"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v7a5 5 0 0 1-10 0z"/><path d="M7 6H4.5a2 2 0 0 0 0 4H7M17 6h2.5a2 2 0 0 1 0 4H17M12 16v3M9 21h6M9 19.5c0-1.2 1.3-2.5 3-2.5s3 1.3 3 2.5"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 11V5.5a1.5 1.5 0 0 1 3 0V11M11 11V4a1.5 1.5 0 0 1 3 0v7M14 10.5V6a1.5 1.5 0 0 1 3 0v6.5"/><path d="M17 12.5a6 6 0 0 1-6.7 6 5.5 5.5 0 0 1-4.4-3.2L3.5 11a1.6 1.6 0 0 1 2.7-1.7L8 11.5"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+</svg>
+
+<!-- ===== 导航 ===== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#hero" aria-label="MAIR·EduNexus 智联教枢 首页">
+      <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-network"/></svg></span>
+      <span>MAIR·EduNexus<em class="brand-sub">智联教枢</em></span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="主导航">
+      <a href="#modes">产品功能</a>
+      <a href="#scenes">应用场景</a>
+      <a href="#workflow">使用流程</a>
+      <a href="#tech">技术特点</a>
+      <a href="#roadmap">开放计划</a>
+      <a class="nav-cta" href="#roadmap">了解开放计划<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="展开菜单" aria-expanded="false">
+      <svg class="icon" style="width:22px;height:22px" aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+<!-- ===== 首屏 Hero ===== -->
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">AI for a Brighter University · MAIR@HUST Group</span>
+      <h1>MAIR·EduNexus<em class="zh">智联教枢</em></h1>
+      <p class="hero-slogan">让问题、资料、课程与学习产物<br>形成<em>可追溯的闭环</em></p>
+      <p class="hero-sub">面向大学师生的 AI 学习与校园知识工作空间。课程问答、事务咨询、PPT 制作、算法练习与 AI 模拟课堂，<b>从一句自然语言开始</b>——回答只基于你提供的课程资料与校园官方文件，每条结论都回到原文出处。</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#modes">了解产品功能<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#workflow">看看怎么用</a>
+      </div>
+      <div class="hero-values">
+        <div class="hv-card"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg><div><b>更高效</b><span>一个入口，完成学习与办事的日常</span></div></div>
+        <div class="hv-card"><svg class="icon" aria-hidden="true"><use href="#i-filecheck"/></svg><div><b>更可信</b><span>每条回答，都回到原文出处</span></div></div>
+        <div class="hv-card"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg><div><b>可沉淀</b><span>学到的东西，都留得下来</span></div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <figure class="browser">
+        <div class="browser-bar">
+          <span class="bb-dots"><i></i><i></i><i></i></span>
+          <span class="bb-url">EduNexus 智联教枢 · 统一工作台</span>
+          <span class="bb-tag">内测中</span>
+        </div>
+        <div class="hero-shot">
+          <img src="https://aka.doubaocdn.com/s/wORAKpk2DJ" alt="MAIR·EduNexus 智联教枢统一工作台：左侧为公共事务、知识学习、PPT 制作、算法练习等模式入口，中部发起对话" fetchpriority="high">
+        </div>
+      </figure>
+      <div class="float-chip fc1"><svg class="icon" aria-hidden="true"><use href="#i-filecheck"/></svg>回答附原文依据</div>
+      <div class="float-chip fc2"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>笔记 · PPT · 代码产物沉淀</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 能力速览 ===== -->
+<div class="cap-strip">
+  <div class="wrap cap-inner">
+    <span class="cap-label">一站式能力</span>
+    <span class="cap-pill">课程问答</span>
+    <span class="cap-pill">学习计划</span>
+    <span class="cap-pill">笔记与复习卡</span>
+    <span class="cap-pill">PPT 生成</span>
+    <span class="cap-pill">代码运行验证</span>
+    <span class="cap-pill">校园事务咨询</span>
+    <span class="cap-pill">AI 模拟课堂</span>
+    <span class="cap-pill">数字人播报</span>
+  </div>
+</div>
+
+<!-- ===== 四种模式 ===== -->
+<section class="section" id="modes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">产品功能</span>
+      <h2>四个入口，覆盖学习与校园生活的日常</h2>
+      <p>公共事务、知识学习、PPT 制作、算法练习——每种模式都由对应领域的专业 Agent 驱动，从一句自然语言开始。</p>
+    </div>
+    <div class="modes-grid">
+      <!-- 公共事务 -->
+      <article class="mode-card reveal">
+        <div class="mode-shot">
+          <span class="mode-num">01 · 公共事务</span>
+          <img src="https://aka.doubaocdn.com/s/DrX4Vo45ho" alt="公共事务模式：依据学生手册回答请假需要什么材料、走什么流程">
+        </div>
+        <div class="mode-body">
+          <span class="mode-tag"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>Policy · 制度与流程</span>
+          <h3 class="mode-title mt-public"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>公共事务</h3>
+          <p class="mode-desc">校园政策、事务咨询与办事指引。基于学生手册、成长手册与培养方案，把政策文件整理成你真正能执行的步骤——需要什么材料、走什么流程、哪些事项要再确认。</p>
+          <p class="mode-out"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>结论回到原文依据，材料与流程分步可查</p>
+          <p class="mode-status"><span class="status-badge sb-live">已实现</span>请假 · 专业分流 · 实验室联系等高频事务</p>
+        </div>
+      </article>
+      <!-- 知识学习 -->
+      <article class="mode-card reveal reveal-d1">
+        <div class="mode-shot">
+          <span class="mode-num">02 · 知识学习</span>
+          <img src="https://aka.doubaocdn.com/s/yvJnmDoz72" alt="知识学习模式：围绕课程结构梳理 13 个教学单元并定位章节">
+        </div>
+        <div class="mode-body">
+          <span class="mode-tag"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Course · 课程与学习</span>
+          <h3 class="mode-title mt-learn"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>知识学习</h3>
+          <p class="mode-desc">课程问答与长期学习陪伴。读懂课程目标、章节主线和知识先后关系，围绕同一门课连续追问；按你的目标与时间生成可执行、可调整的学习计划。</p>
+          <p class="mode-out"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>答案沉淀为笔记、复习卡与学习计划</p>
+          <p class="mode-status"><span class="status-badge sb-live">已实现</span>课程概览 · 章节定位 · 连续追问 · 14 天冲刺计划</p>
+        </div>
+      </article>
+      <!-- PPT 制作 -->
+      <article class="mode-card reveal">
+        <div class="mode-shot">
+          <span class="mode-num">03 · PPT 制作</span>
+          <img src="https://aka.doubaocdn.com/s/QVNHUjmO5j" alt="PPT 制作模式：根据课程资料生成可编辑的 PPTX 并完成质量检查">
+        </div>
+        <div class="mode-body">
+          <span class="mode-tag"><svg class="icon" aria-hidden="true"><use href="#i-slides"/></svg>Create · 内容生成</span>
+          <h3 class="mode-title mt-ppt"><svg class="icon" aria-hidden="true"><use href="#i-slides"/></svg>PPT 制作</h3>
+          <p class="mode-desc">从主题、资料与结构要求生成教学内容与演示文稿。先确认需求与逐页方案，再生成可继续编辑的 PPTX，最后完成页面质量检查——而不是给你一张无法修改的图。</p>
+          <p class="mode-out"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>可编辑 PPTX，支持页级修改与版本保留</p>
+          <p class="mode-status"><span class="status-badge sb-live">已实现</span>课程 PPT · 班会 PPT · 汇报 PPT</p>
+        </div>
+      </article>
+      <!-- 算法练习 -->
+      <article class="mode-card reveal reveal-d1">
+        <div class="mode-shot">
+          <span class="mode-num">04 · 算法练习</span>
+          <img src="https://aka.doubaocdn.com/s/HqRJfOBOXc" alt="算法练习模式：从题目解析到代码实现的分层学习路线">
+        </div>
+        <div class="mode-body">
+          <span class="mode-tag"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Practice · 编程训练</span>
+          <h3 class="mode-title mt-code"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>算法练习</h3>
+          <p class="mode-desc">从题目解析到代码实现。看题、编码、编译运行、错误定位、分层提示、提交复盘——结论区分真实判题结果与 AI 辅助分析，不把解释当成实际执行。</p>
+          <p class="mode-out"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>多语言在线编辑 · 运行验证 · 错题复盘</p>
+          <p class="mode-status"><span class="status-badge sb-live">已实现</span>学习路线 · 代码运行 · 提交记录</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AI 模拟课堂 ===== -->
+<section class="section classroom" id="classroom">
+  <div class="wrap classroom-grid">
+    <div class="classroom-shot reveal">
+      <img src="https://aka.doubaocdn.com/s/mJxMh8mb7g" alt="AI 模拟课堂：围绕强化学习课程讲解 Bellman Equation 的递推形式">
+      <figcaption>AI 模拟课堂 · 围绕当前课件页面讲解与追问</figcaption>
+    </div>
+    <div class="classroom-copy reveal reveal-d1">
+      <span class="sec-eyebrow">AI 模拟课堂</span>
+      <h2 style="font-family:var(--font-display);font-weight:700;font-size:clamp(1.7rem,3vw,2.35rem);line-height:1.3">把课件变成一场可以随时提问的课</h2>
+      <p style="color:var(--ink-soft);margin-top:14px;font-size:1.05rem">选择课件进入课堂，系统按页讲解，你可以围绕当前页面随时提问、完成小测，语音与字幕辅助听讲。课堂中的问题、笔记与测验结果，都会回到你的学习记录里。</p>
+      <ul class="feature-list">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><div><strong>按页讲解与随堂互动</strong><span>讲解内容始终对应当前课件页，支持翻页、提问与小测</span></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><div><strong>课堂记录持续沉淀</strong><span>课堂问题、笔记与 Quiz 结果自动进入对应课程的学习记录</span></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg><div><strong>产物可回访、可继续</strong><span>笔记、复习卡、学习计划与 PPT 产物统一管理，可审阅、修改、导出</span></div></li>
+      </ul>
+      <div class="cr-status">
+        <span class="status-badge sb-live">已实现：课件讲解 · 随堂提问 · 小测</span>
+        <span class="status-badge sb-wip">正在完善：语音播报与数字人状态</span>
+        <span class="status-badge sb-plan">后续适配：更多课件格式</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 应用场景 ===== -->
+<section class="section" id="scenes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">应用场景</span>
+      <h2>为高校里的每一个角色而建</h2>
+      <p>无论你是学习者、授课者还是组织者，EduNexus 都在连接知识、工具与协作。</p>
+    </div>
+    <div class="scene-grid">
+      <div class="scene-card reveal">
+        <svg class="icon" aria-hidden="true"><use href="#i-grad"/></svg>
+        <span class="for-tag">For 学生</span>
+        <h3>学习者</h3>
+        <p>课程答疑、考前复习、算法训练、校园事务一站式完成，学习过程沉淀为可继续使用的个人知识资产。</p>
+      </div>
+      <div class="scene-card reveal reveal-d1">
+        <svg class="icon" aria-hidden="true"><use href="#i-teacher"/></svg>
+        <span class="for-tag">For 教师</span>
+        <h3>授课者</h3>
+        <p>基于课程资料快速生成课堂 PPT 与教案，课件进入 AI 模拟课堂供学生自主预习与复习。</p>
+      </div>
+      <div class="scene-card reveal reveal-d2">
+        <svg class="icon" aria-hidden="true"><use href="#i-building"/></svg>
+        <span class="for-tag">For 学院与教务</span>
+        <h3>组织者</h3>
+        <p>培养方案、学生手册等资料统一接入，事务咨询有依据、可核查，减少重复人工解答。</p>
+      </div>
+      <div class="scene-card reveal reveal-d3">
+        <svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>
+        <span class="for-tag">For 高校团队与共建方</span>
+        <h3>共建者</h3>
+        <p>面向比赛组织方、项目合作成员与其他高校团队开放交流，共同探索高校智能服务的形态。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 证据链 · 使用流程 ===== -->
+<section class="section chain" id="workflow">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">使用流程</span>
+      <h2>从一句话，到一份可追溯的成果</h2>
+      <p>每一次使用都沿着同一条证据链：问题进入平台，专业 Agent 检索资料、生成结果，每一步都可回看。</p>
+    </div>
+    <div class="chain-steps">
+      <div class="chain-step reveal">
+        <div class="chain-node"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></div>
+        <h3>选择场景</h3>
+        <p>进入公共事务、知识学习、PPT 制作或算法练习</p>
+      </div>
+      <div class="chain-step reveal reveal-d1">
+        <div class="chain-node"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg></div>
+        <h3>提出问题</h3>
+        <p>用一句话说明目标，或拖入 PDF、PPT 等资料</p>
+      </div>
+      <div class="chain-step reveal reveal-d2">
+        <div class="chain-node"><svg class="icon" aria-hidden="true"><use href="#i-network"/></svg></div>
+        <h3>专业 Agent 处理</h3>
+        <p>识别意图与资料边界，必要时多 Agent 接力工作</p>
+      </div>
+      <div class="chain-step reveal reveal-d3">
+        <div class="chain-node"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></div>
+        <h3>检索资料与依据</h3>
+        <p>限定课程或事务范围，检索原文并校验适用条件</p>
+      </div>
+      <div class="chain-step reveal reveal-d2">
+        <div class="chain-node"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></div>
+        <h3>生成结果</h3>
+        <p>得到回答、代码、PPT 或学习产物，并完成质量检查</p>
+      </div>
+      <div class="chain-step reveal reveal-d3">
+        <div class="chain-node"><svg class="icon" aria-hidden="true"><use href="#i-cycles"/></svg></div>
+        <h3>追问 · 修改 · 沉淀</h3>
+        <p>继续追问、局部修改或复盘，产物进入个人知识空间</p>
+      </div>
+    </div>
+    <div class="trust-note reveal">
+      <svg class="icon" aria-hidden="true"><use href="#i-filecheck"/></svg>
+      <span><b>回答只基于你的资料。</b>课程与事务回答限定在你提供的课程资料和校园官方文件范围内；资料不足时如实说明边界，不把推测写成事实。</span>
+    </div>
+    <div class="chain-sig reveal">
+      <div><svg class="icon" aria-hidden="true"><use href="#i-filecheck"/></svg>来源可查</div>
+      <div><svg class="icon" aria-hidden="true"><use href="#i-cycles"/></svg>过程可追溯</div>
+      <div><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>结果可信赖</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 技术特点 ===== -->
+<section class="section" id="tech">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">技术特点</span>
+      <h2>不是多聊几个 Agent，而是把能力连成闭环</h2>
+      <p>平台面向使用结果介绍自己的能力——你感受到的是可靠、连续、可沉淀，而不是一串技术名词。</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card reveal">
+        <svg class="icon" aria-hidden="true"><use href="#i-network"/></svg>
+        <h3>多模式 Agent 协同</h3>
+        <p>一个问题涉及多个专业能力时，系统协调多个 Agent 接力完成，逐项交付、不漏答。</p>
+      </div>
+      <div class="tech-card reveal reveal-d1">
+        <svg class="icon" aria-hidden="true"><use href="#i-filter"/></svg>
+        <h3>课程与事务分域检索</h3>
+        <p>课程知识与政策资料分域管理，回答始终限定在正确的资料范围内，避免串扰。</p>
+      </div>
+      <div class="tech-card reveal reveal-d2">
+        <svg class="icon" aria-hidden="true"><use href="#i-filecheck"/></svg>
+        <h3>回答有依据、可核查</h3>
+        <p>结论回到具体文件与页面；资料不足时明确说明边界，不把推测写成事实。</p>
+      </div>
+      <div class="tech-card reveal">
+        <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+        <h3>会话上下文管理</h3>
+        <p>连续追问、切换课程或事务主题不会被旧上下文污染，任务状态全程可见。</p>
+      </div>
+      <div class="tech-card reveal reveal-d1">
+        <svg class="icon" aria-hidden="true"><use href="#i-cycles"/></svg>
+        <h3>从问题到产物的连续工作流</h3>
+        <p>一次对话可沉淀为笔记、复习卡、计划、PPT 与代码，长任务可离开、可恢复。</p>
+      </div>
+      <div class="tech-card reveal reveal-d2">
+        <svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>
+        <h3>多产物支持与账号隔离</h3>
+        <p>课程、文件、PPT、代码与课堂记录统一管理；对话、文件与产物按账号隔离。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 开放计划 · 里程碑 ===== -->
+<section class="section roadmap" id="roadmap">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">开放计划</span>
+      <h2>正在从内测走向师生</h2>
+      <p>平台由华中科技大学计算机学院师生共建，当前处于内测阶段，按真实使用反馈逐步开放。</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-line" aria-hidden="true"></div>
+      <div class="tl-grid">
+        <div class="tl-node tl-now reveal">
+          <span class="tl-dot"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></span>
+          <span class="tl-label">当前阶段<span class="tl-phase">进行中</span></span>
+          <h3>内测与服务器联调</h3>
+          <p>首轮版本已部署上线，面向校园网内测用户开放；正在推进问题优化与各模块服务器联调验收，建立测试反馈闭环。</p>
+        </div>
+        <div class="tl-node tl-next reveal reveal-d1">
+          <span class="tl-dot"><svg class="icon" aria-hidden="true"><use href="#i-teacher"/></svg></span>
+          <span class="tl-label">下一步<span class="tl-phase">计划中</span></span>
+          <h3>面向老师小范围试用</h3>
+          <p>邀请教师体验课程问答、PPT 生成与 AI 模拟课堂，收集真实教学场景中的反馈并迭代。</p>
+        </div>
+        <div class="tl-node tl-later reveal reveal-d2">
+          <span class="tl-dot"><svg class="icon" aria-hidden="true"><use href="#i-grad"/></svg></span>
+          <span class="tl-label">后续<span class="tl-phase">计划中</span></span>
+          <h3>根据反馈逐步开放给学生</h3>
+          <p>在稳定与可信基础上，逐步扩大学生开放范围，让 AI 成为每一位大学生的学习伙伴。</p>
+        </div>
+      </div>
+    </div>
+    <div class="rm-note reveal">
+      <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
+      <span>平台当前处于内测阶段，界面与能力仍在迭代；回答内容由 AI 生成，请以课程资料与官方文件为准，核实关键事实。</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ===== 页脚 ===== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-network"/></svg></span>
+          <span>MAIR·EduNexus 智联教枢</span>
+        </div>
+        <p class="footer-desc">让问题、资料、课程与学习产物形成可追溯的闭环。面向大学师生的 AI 学习与校园知识工作空间。</p>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h4>页面导航</h4>
+          <a href="#modes">产品功能</a>
+          <a href="#scenes">应用场景</a>
+          <a href="#workflow">使用流程</a>
+          <a href="#tech">技术特点</a>
+          <a href="#roadmap">开放计划</a>
+        </div>
+        <div>
+          <h4>项目信息</h4>
+          <a href="https://github.com/Bearcoder6/HUST-CSAgent" target="_blank" rel="noopener">GitHub 仓库</a>
+          <a href="#hero">回到顶部</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 MAIR@HUST Group · 华中科技大学计算机学院</span>
+      <span>内容由 AI 生成，请注意核实关键事实 · 本页为产品介绍，不代表正式发布承诺</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  /* 移动端菜单 */
+  var toggle=document.getElementById("navToggle");
+  var links=document.getElementById("navLinks");
+  toggle.addEventListener("click",function(){
+    var open=links.classList.toggle("open");
+    toggle.setAttribute("aria-expanded",open?"true":"false");
+  });
+  links.addEventListener("click",function(e){
+    if(e.target.closest("a")){links.classList.remove("open");toggle.setAttribute("aria-expanded","false");}
+  });
+
+  /* 滚动显现（尊重减弱动效） */
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var items=document.querySelectorAll(".reveal");
+  if(reduce||!("IntersectionObserver" in window)){
+    items.forEach(function(el){el.classList.add("in");});
+    return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target);}
+    });
+  },{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+  items.forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

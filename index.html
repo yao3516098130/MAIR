@@ -10,13 +10,12 @@
 <meta name="theme-color" content="#0B9E88">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B9E88'/%3E%3Ccircle cx='20' cy='32' r='7' fill='white'/%3E%3Ccircle cx='44' cy='32' r='7' fill='white'/%3E%3Cpath d='M27 32h10' stroke='white' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://miaoda.feishu.cn">
-<link rel="preconnect" href="https://aka.doubaocdn.com" crossorigin>
 <!-- 字体非阻塞加载：先渲染系统字体，字体到位后无闪烁切换（避免 4G 下首屏被字体请求卡住） -->
 <link rel="preload" as="style" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap">
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap"></noscript>
-<!-- 首屏主图预连接 + 提前拉取，缩短 LCP -->
-<link rel="preload" as="image" href="https://aka.doubaocdn.com/s/wORAKpk2DJ" fetchpriority="high" decoding="async">
+<!-- 首屏主图提前拉取，缩短 LCP -->
+<link rel="preload" as="image" href="assets/images/hero-workbench.webp" type="image/webp" fetchpriority="high" decoding="async">
 <style>
 /* ============================================================
    MAIR·EduNexus 智联教枢 — 产品介绍主页 v4
@@ -748,7 +747,10 @@ section{scroll-margin-top:84px}
         </div>
         <!-- 截图占位：统一工作台 -->
         <div class="hero-shot" data-shot="统一工作台整体界面" data-ratio="16:10" data-privacy="隐藏账号头像与昵称、真实对话内容">
-          <img src="https://aka.doubaocdn.com/s/wORAKpk2DJ" alt="MAIR·EduNexus 智联教枢统一工作台：左侧为公共事务、知识学习、PPT 制作、算法练习等模式列表，中部发起对话" fetchpriority="high">
+          <picture>
+            <source srcset="assets/images/hero-workbench.webp" type="image/webp">
+            <img src="assets/images/hero-workbench.png" width="1600" height="900" alt="MAIR·EduNexus 智联教枢统一工作台：左侧为公共事务、知识学习、PPT 制作、算法练习等模式列表，中部发起对话" fetchpriority="high" onerror="this.closest('[data-shot]').classList.add('is-missing')">
+          </picture>
         </div>
       </figure>
       <div class="float-chip fc1"><svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>先锁定资料范围再检索</div>
@@ -882,7 +884,10 @@ section{scroll-margin-top:84px}
         <div class="mode-shot">
           <span class="mode-num">01 · 公共事务</span>
           <div data-shot="公共事务回答界面" data-ratio="16:10" data-privacy="隐藏学生姓名、学号与问卷信息">
-            <img src="https://aka.doubaocdn.com/s/DrX4Vo45ho" loading="lazy" decoding="async" alt="公共事务模式：依据学生手册回答请假需要什么材料、走什么流程">
+            <picture>
+              <source srcset="assets/images/mode-public-affairs.webp" type="image/webp">
+              <img src="assets/images/mode-public-affairs.png" width="1600" height="795" loading="lazy" decoding="async" alt="公共事务模式：依据学生手册回答请假需要什么材料、走什么流程" onerror="this.closest('[data-shot]').classList.add('is-missing')">
+            </picture>
           </div>
         </div>
         <div class="mode-body">
@@ -898,7 +903,10 @@ section{scroll-margin-top:84px}
         <div class="mode-shot">
           <span class="mode-num">02 · 知识学习</span>
           <div data-shot="知识学习对话界面" data-ratio="16:10" data-privacy="隐藏课程编号与教师姓名">
-            <img src="https://aka.doubaocdn.com/s/yvJnmDoz72" loading="lazy" decoding="async" alt="知识学习模式：围绕课程结构梳理 13 个教学单元并定位章节">
+            <picture>
+              <source srcset="assets/images/mode-knowledge-study.webp" type="image/webp">
+              <img src="assets/images/mode-knowledge-study.png" width="1600" height="795" loading="lazy" decoding="async" alt="知识学习模式：围绕课程结构梳理 13 个教学单元并定位章节" onerror="this.closest('[data-shot]').classList.add('is-missing')">
+            </picture>
           </div>
         </div>
         <div class="mode-body">
@@ -914,7 +922,10 @@ section{scroll-margin-top:84px}
         <div class="mode-shot">
           <span class="mode-num">03 · PPT 制作</span>
           <div data-shot="PPT 生成流程与成品预览" data-ratio="16:10" data-privacy="隐藏具体课程名称与文件路径">
-            <img src="https://aka.doubaocdn.com/s/QVNHUjmO5j" loading="lazy" decoding="async" alt="PPT 制作模式：根据课程资料生成可编辑的 PPTX 并完成质量检查">
+            <picture>
+              <source srcset="assets/images/mode-ppt-maker.webp" type="image/webp">
+              <img src="assets/images/mode-ppt-maker.png" width="1600" height="795" loading="lazy" decoding="async" alt="PPT 制作模式：根据课程资料生成可编辑的 PPTX 并完成质量检查" onerror="this.closest('[data-shot]').classList.add('is-missing')">
+            </picture>
           </div>
         </div>
         <div class="mode-body">
@@ -930,7 +941,10 @@ section{scroll-margin-top:84px}
         <div class="mode-shot">
           <span class="mode-num">04 · 算法练习</span>
           <div data-shot="算法代码运行与可视化结果" data-ratio="16:10" data-privacy="隐藏提交账号与 OJ 内部链接">
-            <img src="https://aka.doubaocdn.com/s/HqRJfOBOXc" loading="lazy" decoding="async" alt="算法练习模式：从题目解析到代码实现的分层学习路线">
+            <picture>
+              <source srcset="assets/images/mode-algorithm.webp" type="image/webp">
+              <img src="assets/images/mode-algorithm.png" width="1600" height="793" loading="lazy" decoding="async" alt="算法练习模式：从题目解析到代码实现的分层学习路线" onerror="this.closest('[data-shot]').classList.add('is-missing')">
+            </picture>
           </div>
         </div>
         <div class="mode-body">
@@ -950,7 +964,10 @@ section{scroll-margin-top:84px}
   <div class="wrap classroom-grid">
     <div class="classroom-shot reveal">
       <div data-shot="AI 模拟课堂课件讲解页面" data-ratio="16:10" data-privacy="隐藏课件来源与教师署名">
-        <img src="https://aka.doubaocdn.com/s/mJxMh8mb7g" loading="lazy" decoding="async" alt="AI 模拟课堂：围绕强化学习课程讲解 Bellman Equation 的递推形式">
+        <picture>
+          <source srcset="assets/images/ai-classroom.webp" type="image/webp">
+          <img src="assets/images/ai-classroom.png" width="1600" height="795" loading="lazy" decoding="async" alt="AI 模拟课堂：围绕强化学习课程讲解 Bellman Equation 的递推形式" onerror="this.closest('[data-shot]').classList.add('is-missing')">
+        </picture>
       </div>
       <figcaption>AI 模拟课堂 · 围绕当前课件页面讲解与追问</figcaption>
     </div>
